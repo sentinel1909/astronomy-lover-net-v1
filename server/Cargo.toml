@@ -1,0 +1,31 @@
+[package]
+name = "astronomy-lover-net-v1-server"
+version.workspace = true 
+edition.workspace = true 
+description = "A full stack site, built with Axum and Leptos, that fetches and displays the daily image/video from the NASA APOD API"
+readme = "README.md"
+repository = "https://github.com/sentinel1909/nasa-imagery-viewer-v2.git"
+license = "MIT"
+publish = false
+
+[[bin]]
+name = "astronomy-lover-net-v1-server"
+path = "src/bin/main.rs"
+
+[lib]
+name = "astronomy_lover_net_v1_lib"
+path = "src/lib/lib.rs"
+
+[dependencies]
+anyhow = "1.0.95"
+axum = "0.8.1"
+shuttle-axum = "0.49.0"
+shuttle-runtime = { version = "0.49.0", default-features = false  }
+tokio = { version = "1.42.0", features = [ "net" ] }
+tower = "0.5.2"
+tower-http = { version = "0.6.1", features = [ "cors", "fs", "normalize-path", "request-id", "trace", "util" ] }
+tracing = { version = "0.1.41", features = [ "log" ] }
+tracing-bunyan-formatter = "0.3.9"
+tracing-log = "0.2.0"
+tracing-subscriber = { version = "0.3.19", features = ["registry", "env-filter"] }
+uuid = { version = "1.11.0", features = [ "v4" ] }

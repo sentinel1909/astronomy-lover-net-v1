@@ -1,0 +1,12 @@
+# Shuttle configuration
+name = "astronomy-lover-net-v1"
+
+[deploy]
+include = [
+  "public/*"
+]
+
+[build]
+assets = [
+  "public/*",
+]

@@ -1,0 +1,21 @@
+[package]
+name = "astronomy-lover-net-v1-site"
+version.workspace = true 
+edition.workspace = true 
+publish = false
+
+[[bin]]
+name = "astronomy-lover-net-v1-site"
+path = "src/bin/main.rs"
+
+[lib]
+name = "astronomy_lover_net_v1_lib"
+path = "src/lib/lib.rs"
+
+[dependencies]
+console_error_panic_hook = "0.1.7"
+gloo-net = { version = "0.6.0", features = ["json"] }
+leptos = { version = "0.7.0", features = ["csr"] }
+serde = { version = "1.0.210", features = ["derive"] }
+url = "2.5.2"
+wasm-bindgen-futures = "0.4.43"

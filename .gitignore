@@ -1,0 +1,13 @@
+# astronomy-lover-net-v1 gitignore configuration
+
+# VS Code Settings
+.vscode
+
+# Build artifacts
+public
+target
+
+# Shuttle configuraiton and environment variables
+.shuttle*
+Secrets*.toml
+/target
