@@ -1,11 +1,11 @@
 // src/lib/domain.rs
 
 // dependencies
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 
 // struct to represent the data returned from the NASA APOD API
-#[derive(Deserialize, Debug, Clone)]
-pub struct NASAData {
+#[derive(Clone, Debug, Deserialize, Serialize)]
+pub struct NasaData {
     pub date: String,
     pub title: String,
     pub explanation: String,
@@ -16,7 +16,7 @@ pub struct NASAData {
 }
 
 // implement the default trait for the NASAData struct
-impl Default for NASAData {
+impl Default for NasaData {
     fn default() -> Self {
         Self {
             date: "".to_string(),

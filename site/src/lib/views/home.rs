@@ -1,7 +1,7 @@
 // src/lib/views/home.rs
 
 // dependencies
-use crate::domain::NASAData;
+use domain::NasaData;
 use gloo_net::http::Request;
 use leptos::prelude::*;
 use std::rc::Rc;
@@ -11,7 +11,7 @@ use url::Url;
 const NASA_API_KEY: &str = "lsULnkmChaJlS3fZO85M3cnGA8TFCAm2peEfd9QS";
 
 // function to fetch data from the NASA Astronomy Photo of the Day API
-async fn get_api_data(api_url: &str) -> NASAData {
+async fn get_api_data(api_url: &str) -> NasaData {
     Request::get(api_url)
         .send()
         .await
@@ -36,7 +36,7 @@ fn build_api_url() -> Url {
 #[component]
 pub fn Home() -> impl IntoView {
     let api_url = Rc::new(build_api_url());
-    let (nasa_data, set_nasa_data) = signal(NASAData::default());
+    let (nasa_data, set_nasa_data) = signal(NasaData::default());
     let api_url_clone = Rc::clone(&api_url);
     Effect::new(move |_| {
         let api_url_clone = Rc::clone(&api_url_clone);

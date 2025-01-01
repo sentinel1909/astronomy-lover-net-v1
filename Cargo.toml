@@ -1,6 +1,7 @@
 [workspace]
 resolver = "2"
 members = [
+  "domain",
   "server",
   "site",
 ]
@@ -10,4 +11,8 @@ default-members = [ "server" ]
 version = "0.10.0"
 edition = "2021"
 license = "MIT"
+
+[workspace.dependencies]
+domain = { path = "./domain" }
+serde = { version = "1.0.217", features = ["derive"] }
 

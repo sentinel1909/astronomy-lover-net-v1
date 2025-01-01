@@ -3,21 +3,9 @@
 // dependencies
 use crate::service::AppState;
 use axum::{extract::State, http::StatusCode, response::IntoResponse, Json};
-use serde::{Deserialize, Serialize};
+use domain::NasaData;
 use serde_json::json;
 use url::Url;
-
-// struct to represent the data returned from the NASA APOD API
-#[derive(Clone, Deserialize, Debug, Serialize)]
-pub struct NasaData {
-    pub date: String,
-    pub title: String,
-    pub explanation: String,
-    pub copyright: Option<String>,
-    pub media_type: String,
-    pub url: String,
-    pub hdurl: Option<String>,
-}
 
 // get endpoint handler to retrieve data from the NASA API
 pub async fn from_nasa_api(State(state): State<AppState>) -> impl IntoResponse {
