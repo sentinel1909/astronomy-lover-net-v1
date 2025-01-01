@@ -4,6 +4,7 @@
 use astronomy_lover_net_v1_lib::configuration::AppConfig;
 use astronomy_lover_net_v1_lib::service::{AppState, AstronomyLoverNetApplication};
 use astronomy_lover_net_v1_lib::{get_subscriber, init_subscriber};
+use reqwest::Client;
 use shuttle_runtime::{Error, SecretStore, Secrets};
 
 // main function
@@ -17,11 +18,12 @@ async fn main(#[Secrets] secrets: SecretStore) -> Result<AstronomyLoverNetApplic
     );
     init_subscriber(subscriber);
 
-    // get the app configuration
+    // get the app configuration, including configuration and reqwest client
     let config = AppConfig::try_from(secrets)?;
+    let client = Client::new();
 
     // set the application state
-    let app_state = AppState { config };
+    let app_state = AppState { config, client };
 
     // build the app router
     let AstronomyLoverNetApplication(router) = AstronomyLoverNetApplication::build(app_state)?;

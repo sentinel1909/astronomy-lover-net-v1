@@ -2,10 +2,11 @@
 
 // dependencies
 use crate::configuration::AppConfig;
-use crate::handlers::health_check;
+use crate::handlers::{get_nasa_data::from_nasa_api, health_check};
 use crate::telemetry::MakeRequestUuid;
 use anyhow::Result;
 use axum::{http::HeaderName, routing::get, Router};
+use reqwest::Client;
 use shuttle_runtime::{Error, Service};
 use std::net::SocketAddr;
 use tokio::net::TcpListener;
@@ -27,6 +28,7 @@ pub struct AstronomyLoverNetApplication(pub Router);
 #[derive(Clone)]
 pub struct AppState {
     pub config: AppConfig,
+    pub client: Client,
 }
 
 // methods for the AstronomyLoverNetService type
@@ -54,6 +56,7 @@ impl AstronomyLoverNetApplication {
         let x_request_id = HeaderName::from_static("x-request-id");
         let api_routes = Router::new()
             .route("/health_check", get(health_check))
+            .route("/nasa_data", get(from_nasa_api))
             .layer(cors)
             .with_state(state)
             .layer(
