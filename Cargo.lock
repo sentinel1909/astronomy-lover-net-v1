@@ -102,8 +102,6 @@ dependencies = [
  "domain",
  "gloo-net",
  "leptos",
- "serde",
- "url",
  "wasm-bindgen-futures",
 ]
 
