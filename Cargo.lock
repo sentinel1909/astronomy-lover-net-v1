@@ -61,7 +61,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "41058deaa38c9d9dd933d6d238d825227cffa668e2839b52879f6619c63eee3b"
 dependencies = [
  "futures",
- "thiserror 2.0.3",
+ "thiserror 2.0.9",
  "wasm-bindgen-futures",
 ]
 
@@ -83,6 +83,7 @@ dependencies = [
  "serde_json",
  "shuttle-axum",
  "shuttle-runtime",
+ "thiserror 2.0.9",
  "tokio",
  "tower 0.5.2",
  "tower-http",
@@ -1417,7 +1418,7 @@ dependencies = [
  "server_fn",
  "slotmap",
  "tachys",
- "thiserror 2.0.3",
+ "thiserror 2.0.9",
  "throw_error",
  "typed-builder",
  "typed-builder-macro",
@@ -1434,7 +1435,7 @@ dependencies = [
  "config",
  "regex",
  "serde",
- "thiserror 2.0.3",
+ "thiserror 2.0.9",
  "typed-builder",
 ]
 
@@ -2166,7 +2167,7 @@ dependencies = [
  "send_wrapper",
  "serde",
  "slotmap",
- "thiserror 2.0.3",
+ "thiserror 2.0.9",
  "web-sys",
 ]
 
@@ -2680,7 +2681,7 @@ dependencies = [
  "serde_json",
  "serde_qs",
  "server_fn_macro_default",
- "thiserror 2.0.3",
+ "thiserror 2.0.9",
  "throw_error",
  "url",
  "wasm-bindgen",
@@ -2805,7 +2806,7 @@ dependencies = [
  "serde",
  "serde_json",
  "strum 0.26.3",
- "thiserror 2.0.3",
+ "thiserror 2.0.9",
  "tower 0.4.13",
  "tracing",
  "tracing-opentelemetry",
@@ -2864,7 +2865,7 @@ dependencies = [
  "serde",
  "shuttle-common",
  "strfmt",
- "thiserror 2.0.3",
+ "thiserror 2.0.9",
 ]
 
 [[package]]
@@ -3146,11 +3147,11 @@ dependencies = [
 
 [[package]]
 name = "thiserror"
-version = "2.0.3"
+version = "2.0.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c006c85c7651b3cf2ada4584faa36773bd07bac24acfb39f3c431b36d7e667aa"
+checksum = "f072643fd0190df67a8bab670c20ef5d8737177d6ac6b2e9a236cb096206b2cc"
 dependencies = [
- "thiserror-impl 2.0.3",
+ "thiserror-impl 2.0.9",
 ]
 
 [[package]]
@@ -3166,9 +3167,9 @@ dependencies = [
 
 [[package]]
 name = "thiserror-impl"
-version = "2.0.3"
+version = "2.0.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f077553d607adc1caf65430528a576c757a71ed73944b66ebb58ef2bbd243568"
+checksum = "7b50fa271071aae2e6ee85f842e2e28ba8cd2c5fb67f11fcb1fd70b276f9e7d4"
 dependencies = [
  "proc-macro2",
  "quote",
