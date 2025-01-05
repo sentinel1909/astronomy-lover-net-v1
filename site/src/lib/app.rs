@@ -8,6 +8,8 @@ use leptos::prelude::*;
 #[component]
 pub fn App() -> impl IntoView {
     view! {
-      <Root />
+       <div class="container mx-auto">
+        <Root />
+       </div>
     }
 }
