@@ -6,9 +6,11 @@ use crate::handlers::{get_nasa_data::from_nasa_api, health_check};
 use crate::telemetry::MakeRequestUuid;
 use anyhow::Result;
 use axum::{http::HeaderName, routing::get, Router};
+use libsql::Database;
 use reqwest::Client;
 use shuttle_runtime::{Error, Service};
 use std::net::SocketAddr;
+use std::sync::Arc;
 use tokio::net::TcpListener;
 use tower::layer::Layer;
 use tower::ServiceBuilder;
@@ -28,7 +30,8 @@ pub struct AstronomyLoverNetApplication(pub Router);
 #[derive(Clone)]
 pub struct AppState {
     pub config: AppConfig,
-    pub client: Client,
+    pub api_client: Client,
+    pub db_client: Arc<Database>,
 }
 
 // methods for the AstronomyLoverNetService type

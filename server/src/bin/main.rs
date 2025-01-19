@@ -6,7 +6,7 @@ use astronomy_lover_net_v1_lib::service::{AppState, AstronomyLoverNetApplication
 use astronomy_lover_net_v1_lib::{get_subscriber, init_subscriber};
 use libsql::Database;
 use reqwest::Client;
-use shuttle_runtime::{Error, SecretStore, Secrets};
+use shuttle_runtime::{CustomError, Error, SecretStore, Secrets};
 use shuttle_turso::Turso;
 use std::sync::Arc;
 
@@ -24,19 +24,31 @@ async fn main(
     );
     init_subscriber(subscriber);
 
-    let client = Arc::new(client);
-    let conn = client.connect().unwrap();
+    // create a database connection using the supplied Turso client
+    let db_client = Arc::new(client);
+    let conn = db_client.connect().map_err(|e| {
+        let error_msg = format!("Unable to connect to the database: {}", e);
+        CustomError::new(e).context(error_msg)
+    })?;
 
+    // create the database table
     conn.execute("CREATE TABLE IF NOT EXISTS nasa_api_data (uid text primary key, copyright text, date text, explanation text, hdurl text, media_type text, title text, url text);", ())
         .await
-        .unwrap();
+        .map_err(|e| {
+            let error_msg = format!("Unable to create table in the database: {}", e);
+            CustomError::new(e).context(error_msg)
+        })?;
 
-    // get the app configuration, including configuration and reqwest client
+    // get the app configuration, including configuration. reqwest client, and Turso database client
     let config = AppConfig::try_from(secrets)?;
-    let client = Client::new();
+    let api_client = Client::new();
 
     // set the application state
-    let app_state = AppState { config, client };
+    let app_state = AppState {
+        config,
+        api_client,
+        db_client,
+    };
 
     // build the app router
     let AstronomyLoverNetApplication(router) = AstronomyLoverNetApplication::build(app_state)?;
