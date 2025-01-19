@@ -1,7 +1,7 @@
 [package]
 name = "astronomy-lover-net-v1-server"
-version.workspace = true 
-edition.workspace = true 
+version.workspace = true
+edition.workspace = true
 description = "A full stack site, built with Axum and Leptos, that fetches and displays the daily image/video from the NASA APOD API"
 readme = "README.md"
 repository = "https://github.com/sentinel1909/nasa-imagery-viewer-v2.git"
@@ -23,15 +23,25 @@ domain = { workspace = true }
 reqwest = { version = "0.12.12", features = ["json"] }
 serde = { workspace = true }
 serde_json = "1.0.134"
-shuttle-axum = "0.50.0"
-shuttle-runtime = { version = "0.50.0", default-features = false  }
+shuttle-axum = "0.51.0"
+shuttle-runtime = { version = "0.51.0", default-features = false }
 thiserror = "2.0.9"
-tokio = { version = "1.42.0", features = [ "net" ] }
+tokio = { version = "1.42.0", features = ["net"] }
 tower = "0.5.2"
-tower-http = { version = "0.6.1", features = [ "cors", "fs", "normalize-path", "request-id", "trace", "util" ] }
-tracing = { version = "0.1.41", features = [ "log" ] }
+tower-http = { version = "0.6.1", features = [
+    "cors",
+    "fs",
+    "normalize-path",
+    "request-id",
+    "trace",
+    "util",
+] }
+tracing = { version = "0.1.41", features = ["log"] }
 tracing-bunyan-formatter = "0.3.9"
 tracing-log = "0.2.0"
-tracing-subscriber = { version = "0.3.19", features = ["registry", "env-filter"] }
+tracing-subscriber = { version = "0.3.19", features = [
+    "registry",
+    "env-filter",
+] }
 url = "2.5.2"
-uuid = { version = "1.11.0", features = [ "v4" ] }
+uuid = { version = "1.11.0", features = ["v4"] }

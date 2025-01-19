@@ -3,6 +3,9 @@
 # VS Code Settings
 .vscode
 
+# Zed Settings
+.zed
+
 # Build artifacts
 public
 target

@@ -47,10 +47,10 @@ pub fn Home() -> impl IntoView {
           <br />
           <Show when=move || { nasa_data.get().media_type == "image"}
             fallback=move || view! { <h3>"Video: "</h3>
-                                     <iframe src={move || nasa_data.get().url} />}
+                                     <iframe src={move || nasa_data.get().url} width={"1024"} height={"768"} />}
           >
             <h3>"Image: "</h3>
-            <img src={move || nasa_data.get().url} />
+            <img src={move || nasa_data.get().url} width={"1024"} height={"768"} />
           </Show>
           <h3>"Copyright: "</h3>
           <p>{copyright_info}</p>

@@ -17,4 +17,6 @@ console_error_panic_hook = "0.1.7"
 domain = { workspace = true}
 gloo-net = { version = "0.6.0", features = ["json"] }
 leptos = { version = "0.7.0", features = ["csr"] }
+leptos_router = "0.7.4"
+leptos_router_macro = "0.7.4"
 wasm-bindgen-futures = "0.4.43"
