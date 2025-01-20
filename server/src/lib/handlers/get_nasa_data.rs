@@ -3,7 +3,12 @@
 // dependencies
 use crate::errors::ApiError;
 use crate::service::AppState;
-use axum::{extract::State, http::StatusCode, response::IntoResponse};
+use axum::{
+    extract::State,
+    http::StatusCode,
+    response::{IntoResponse, Json},
+};
+use chrono::Local;
 use domain::NasaData;
 use url::Url;
 use uuid::Uuid;
@@ -37,4 +42,48 @@ pub async fn from_nasa_api(State(state): State<AppState>) -> Result<impl IntoRes
     })?;
 
     Ok(StatusCode::OK)
+}
+
+// get endpoint handler to retrieve cached NASA API date
+pub async fn from_cached(State(state): State<AppState>) -> Result<impl IntoResponse, ApiError> {
+    let today = Local::now().to_string();
+    let conn = state
+        .db_client
+        .connect()
+        .map_err(|e| ApiError::Internal(e.to_string()))?;
+    let mut result = conn
+        .query("SELECT * FROM nasa_api_data WHERE date = ?1", [today])
+        .await
+        .map_err(|e| ApiError::Internal(e.to_string()))?;
+
+    let response = result
+        .next()
+        .await
+        .map_err(|e| ApiError::Internal(e.to_string()))?;
+
+    if let Some(row) = response {
+        let copyright: Option<String> = Some(row.get(1).unwrap_or_default());
+        let date: String = row.get(2).unwrap_or_default();
+        let explanation: String = row.get(3).unwrap_or_default();
+        let hdurl = row.get(4).unwrap_or_default();
+        let media_type: String = row.get(5).unwrap_or_default();
+        let title: String = row.get(6).unwrap_or_default();
+        let url: String = row.get(7).unwrap_or_default();
+
+        let body = NasaData {
+            copyright,
+            date,
+            explanation,
+            hdurl,
+            media_type,
+            title,
+            url,
+        };
+
+        let response_body = Json(body);
+
+        Ok((StatusCode::OK, response_body).into_response())
+    } else {
+        Ok(StatusCode::NOT_FOUND.into_response())
+    }
 }

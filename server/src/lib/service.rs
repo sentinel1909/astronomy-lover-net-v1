@@ -2,7 +2,10 @@
 
 // dependencies
 use crate::configuration::AppConfig;
-use crate::handlers::{get_nasa_data::from_nasa_api, health_check};
+use crate::handlers::{
+    get_nasa_data::{from_cached, from_nasa_api},
+    health_check,
+};
 use crate::telemetry::MakeRequestUuid;
 use anyhow::Result;
 use axum::{http::HeaderName, routing::get, Router};
@@ -60,6 +63,7 @@ impl AstronomyLoverNetApplication {
         let api_routes = Router::new()
             .route("/health_check", get(health_check))
             .route("/nasa_data", get(from_nasa_api))
+            .route("/nasa_cached", get(from_cached))
             .layer(cors)
             .with_state(state)
             .layer(

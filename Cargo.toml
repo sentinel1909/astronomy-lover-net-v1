@@ -14,5 +14,6 @@ license = "MIT"
 
 [workspace.dependencies]
 domain = { path = "./domain" }
+libsql = "0.6.0"
 serde = { version = "1.0.217", features = ["derive"] }
 

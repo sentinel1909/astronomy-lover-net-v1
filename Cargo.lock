@@ -94,7 +94,9 @@ version = "0.15.0"
 dependencies = [
  "anyhow",
  "axum 0.8.1",
+ "chrono",
  "domain",
+ "futures-util",
  "libsql",
  "reqwest 0.12.12",
  "serde",
@@ -749,6 +751,7 @@ dependencies = [
 name = "domain"
 version = "0.15.0"
 dependencies = [
+ "libsql",
  "serde",
 ]
 

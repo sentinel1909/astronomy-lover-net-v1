@@ -19,7 +19,7 @@ async fn get_api_data(api_url: &str) -> NasaData {
 // function which returns the home or index page view
 #[component]
 pub fn Home() -> impl IntoView {
-    let api_url = "https://astronomy-lover-net-v1-p7dk.shuttle.app/api/nasa_data";
+    let api_url = "https://astronomy-lover-net-v1-p7dk.shuttle.app/api/nasa_cached";
     let (nasa_data, set_nasa_data) = signal(NasaData::default());
     Effect::new(move |_| {
         wasm_bindgen_futures::spawn_local(async move {

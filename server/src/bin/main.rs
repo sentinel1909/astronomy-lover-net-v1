@@ -32,7 +32,7 @@ async fn main(
     })?;
 
     // create the database table
-    conn.execute("CREATE TABLE IF NOT EXISTS nasa_api_data (uid text primary key, copyright text, date text, explanation text, hdurl text, media_type text, title text, url text);", ())
+    conn.execute("CREATE TABLE IF NOT EXISTS nasa_api_data (uid TEXT PRIMARY KEY, copyright TEXT, date TEXT, explanation TEXT UNIQUE, hdurl TEXT, media_type TEXT, title TEXT, url TEXT);", ())
         .await
         .map_err(|e| {
             let error_msg = format!("Unable to create table in the database: {}", e);

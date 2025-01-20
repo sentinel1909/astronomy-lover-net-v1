@@ -1,6 +1,7 @@
 // src/lib/domain.rs
 
 // dependencies
+
 use serde::{Deserialize, Serialize};
 
 // struct to represent the data returned from the NASA APOD API
