@@ -46,13 +46,18 @@ pub async fn from_nasa_api(State(state): State<AppState>) -> Result<impl IntoRes
 
 // get endpoint handler to retrieve cached NASA API date
 pub async fn from_cached(State(state): State<AppState>) -> Result<impl IntoResponse, ApiError> {
-    let today = Local::now().to_string();
+    let today = Local::now().naive_local();
+    let formatted_date = today.format("%Y-%m-%d").to_string();
+    println!("{}", today);
     let conn = state
         .db_client
         .connect()
         .map_err(|e| ApiError::Internal(e.to_string()))?;
     let mut result = conn
-        .query("SELECT * FROM nasa_api_data WHERE date = ?1", [today])
+        .query(
+            "SELECT * FROM nasa_api_data WHERE date = ?1",
+            [formatted_date],
+        )
         .await
         .map_err(|e| ApiError::Internal(e.to_string()))?;
 
