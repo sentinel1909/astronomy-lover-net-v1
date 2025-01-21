@@ -10,6 +10,7 @@ use axum::{
 };
 use chrono::Local;
 use domain::NasaData;
+use libsql::params;
 use url::Url;
 use uuid::Uuid;
 
@@ -37,7 +38,7 @@ pub async fn from_nasa_api(State(state): State<AppState>) -> Result<impl IntoRes
         .connect()
         .map_err(|e| ApiError::Internal(e.to_string()))?;
 
-    conn.execute("INSERT INTO nasa_api_data (uid, copyright, date, explanation, hdurl, media_type, title, url) VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8)", [Uuid::new_v4().to_string(), response.copyright.unwrap_or_default(), response.date, response.explanation, response.hdurl.unwrap_or_default(), response.media_type, response.title, response.url]).await.map_err(|e| {
+    conn.execute("INSERT INTO nasa_api_data (uid, copyright, date, explanation, hdurl, media_type, title, url) VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8)", params![Uuid::new_v4().to_string(), response.copyright, response.date, response.explanation, response.hdurl, response.media_type, response.title, response.url]).await.map_err(|e| {
         ApiError::Internal(e.to_string())
     })?;
 
@@ -48,7 +49,7 @@ pub async fn from_nasa_api(State(state): State<AppState>) -> Result<impl IntoRes
 pub async fn from_cached(State(state): State<AppState>) -> Result<impl IntoResponse, ApiError> {
     let today = Local::now().naive_local();
     let formatted_date = today.format("%Y-%m-%d").to_string();
-    println!("{}", today);
+    
     let conn = state
         .db_client
         .connect()

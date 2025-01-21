@@ -8,12 +8,11 @@ members = [
 default-members = [ "server" ]
 
 [workspace.package]
-version = "0.15.0"
+version = "0.16.0"
 edition = "2021"
 license = "MIT"
 
 [workspace.dependencies]
 domain = { path = "./domain" }
-libsql = "0.6.0"
 serde = { version = "1.0.217", features = ["derive"] }
 

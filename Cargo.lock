@@ -90,7 +90,7 @@ checksum = "34ac096ce696dc2fcabef30516bb13c0a68a11d30131d3df6f04711467681b04"
 
 [[package]]
 name = "astronomy-lover-net-v1-server"
-version = "0.15.0"
+version = "0.16.0"
 dependencies = [
  "anyhow",
  "axum 0.8.1",
@@ -118,7 +118,7 @@ dependencies = [
 
 [[package]]
 name = "astronomy-lover-net-v1-site"
-version = "0.15.0"
+version = "0.16.0"
 dependencies = [
  "console_error_panic_hook",
  "domain",
@@ -749,9 +749,8 @@ dependencies = [
 
 [[package]]
 name = "domain"
-version = "0.15.0"
+version = "0.16.0"
 dependencies = [
- "libsql",
  "serde",
 ]
 
