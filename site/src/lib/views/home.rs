@@ -31,7 +31,7 @@ pub fn Home() -> impl IntoView {
     // set up a closure which outputs copyright info for the photo or video
     let copyright_info = move || match nasa_data.get().copyright {
         Some(copyright) => copyright,
-        _ => {
+        None => {
             "No attributed copyright information. There might be a watermark in the image or video."
                 .to_string()
         }
