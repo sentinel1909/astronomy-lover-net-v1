@@ -68,7 +68,7 @@ pub async fn from_cached(State(state): State<AppState>) -> Result<impl IntoRespo
         .map_err(|e| ApiError::Internal(e.to_string()))?;
 
     if let Some(row) = response {
-        let copyright: Option<String> = Some(row.get(1).unwrap_or_default());
+        let copyright: Option<String> = row.get(1).unwrap_or_default();
         let date: String = row.get(2).unwrap_or_default();
         let explanation: String = row.get(3).unwrap_or_default();
         let hdurl = row.get(4).unwrap_or_default();
