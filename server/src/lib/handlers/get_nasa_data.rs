@@ -42,14 +42,15 @@ pub async fn from_nasa_api(State(state): State<AppState>) -> Result<impl IntoRes
         ApiError::Internal(e.to_string())
     })?;
 
-    Ok(StatusCode::OK)
+    let response_body = Json("Today's data retrieved and cached successfully.");
+    Ok((StatusCode::OK, response_body))
 }
 
 // get endpoint handler to retrieve cached NASA API date
 pub async fn from_cached(State(state): State<AppState>) -> Result<impl IntoResponse, ApiError> {
     let today = Local::now().naive_local();
     let formatted_date = today.format("%Y-%m-%d").to_string();
-    
+
     let conn = state
         .db_client
         .connect()
@@ -90,6 +91,7 @@ pub async fn from_cached(State(state): State<AppState>) -> Result<impl IntoRespo
 
         Ok((StatusCode::OK, response_body).into_response())
     } else {
-        Ok(StatusCode::NOT_FOUND.into_response())
+        let response_not_found = Json("No data cached.");
+        Ok((StatusCode::NOT_FOUND, response_not_found).into_response())
     }
 }
