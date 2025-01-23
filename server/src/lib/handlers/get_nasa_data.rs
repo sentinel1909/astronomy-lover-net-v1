@@ -15,6 +15,7 @@ use url::Url;
 use uuid::Uuid;
 
 // get endpoint handler to retrieve data from the NASA API
+#[tracing::instrument(name = "GET - from NASA API", skip(state))]
 pub async fn from_nasa_api(State(state): State<AppState>) -> Result<impl IntoResponse, ApiError> {
     let key = state.config.api_key;
     let api_key_segment = ["apod?api_key=", &key].concat();
@@ -47,10 +48,10 @@ pub async fn from_nasa_api(State(state): State<AppState>) -> Result<impl IntoRes
 }
 
 // get endpoint handler to retrieve cached NASA API date
+#[tracing::instrument(name = "GET - from cached data in database", skip(state))]
 pub async fn from_cached(State(state): State<AppState>) -> Result<impl IntoResponse, ApiError> {
     let today = Local::now().naive_local() + Duration::days(-1);
     let formatted_date = today.format("%Y-%m-%d").to_string();
-
     let conn = state
         .db_client
         .connect()
