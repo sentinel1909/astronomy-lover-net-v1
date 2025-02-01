@@ -8,7 +8,7 @@ use axum::{
     http::StatusCode,
     response::{IntoResponse, Json},
 };
-use chrono::{Duration, Local};
+use chrono::Utc;
 use domain::NasaData;
 use libsql::params;
 use url::Url;
@@ -50,16 +50,18 @@ pub async fn from_nasa_api(State(state): State<AppState>) -> Result<impl IntoRes
 // get endpoint handler to retrieve cached NASA API date
 #[tracing::instrument(name = "GET - from cached data in database", skip(state))]
 pub async fn from_cached(State(state): State<AppState>) -> Result<impl IntoResponse, ApiError> {
-    let today = Local::now().naive_local() + Duration::days(-1);
-    let formatted_date = today.format("%Y-%m-%d").to_string();
+    let today = Utc::now().naive_local();
+    let today_formatted = today.format("%Y-%m-%d").to_string();
+    println!("{}", today_formatted);
+
     let conn = state
         .db_client
         .connect()
         .map_err(|e| ApiError::Internal(e.to_string()))?;
     let mut result = conn
         .query(
-            "SELECT * FROM nasa_api_data WHERE date = ?1",
-            [formatted_date],
+            "SELECT * FROM nasa_api_data WHERE date < ?1",
+            [today_formatted],
         )
         .await
         .map_err(|e| ApiError::Internal(e.to_string()))?;
