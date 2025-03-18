@@ -14,7 +14,7 @@ use std::sync::Arc;
 #[shuttle_runtime::main]
 async fn main(
     #[Secrets] secrets: SecretStore,
-    #[Turso(addr = "{secrets.TURSO_ADDR}", token = "{secrets.TURSO_TOKEN}")] client: Database,
+    #[Turso(addr = "{secrets.TURSO_DB_ADDR}", token = "{secrets.TURSO_DB_TOKEN}")] client: Database,
 ) -> Result<AstronomyLoverNetApplication, Error> {
     // initialize tracing
     let subscriber = get_subscriber(

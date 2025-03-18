@@ -22,13 +22,13 @@ axum = "0.8.1"
 chrono = "0.4.39"
 domain = { workspace = true }
 futures-util = "0.3.31"
-libsql = "0.6.0" 
+libsql = "0.6.0"
 reqwest = { version = "0.12.12", features = ["json"] }
 serde = { workspace = true }
 serde_json = "1.0.134"
-shuttle-axum = "0.51.0"
-shuttle-runtime = { version = "0.51.0", default-features = false }
-shuttle-turso = "0.51.0"
+shuttle-axum = "0.53.0"
+shuttle-runtime = { version = "0.53.0", default-features = false }
+shuttle-turso = "0.53.0"
 thiserror = "2.0.9"
 tokio = { version = "1.42.0", features = ["net"] }
 tower = "0.5.2"
