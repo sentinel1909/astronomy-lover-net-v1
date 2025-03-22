@@ -2,10 +2,10 @@
 name = "astronomy-lover-net-v1-server"
 version.workspace = true
 edition.workspace = true
-description = "A full stack site, built with Axum and Leptos, that fetches and displays the daily image/video from the NASA APOD API"
-readme = "README.md"
-repository = "https://github.com/sentinel1909/nasa-imagery-viewer-v2.git"
-license = "MIT"
+description = "The server component of the astronomy-lover-net-v1 project"
+readme.workspace = true
+repository.workspace = true
+license.workspace = true
 publish = false
 
 [[bin]]

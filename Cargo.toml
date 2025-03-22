@@ -1,18 +1,17 @@
 [workspace]
 resolver = "2"
-members = [
-  "domain",
-  "server",
-  "site",
-]
-default-members = [ "server" ]
+members = ["domain", "server", "site"]
+default-members = ["server"]
 
 [workspace.package]
-version = "0.16.3"
+version = "0.16.4"
 edition = "2021"
+description = "A full stack site, built with Axum and Leptos, that fetches and displays the daily image/video from the NASA APOD API"
+readme = "README.md"
+repository = "https://github.com/sentinel1909/nasa-imagery-viewer-v2.git"
 license = "MIT"
+publish = false
 
 [workspace.dependencies]
 domain = { path = "./domain" }
 serde = { version = "1.0.217", features = ["derive"] }
-

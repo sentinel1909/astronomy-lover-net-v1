@@ -60,7 +60,7 @@ pub async fn from_cached(State(state): State<AppState>) -> Result<impl IntoRespo
         .map_err(|e| ApiError::Internal(e.to_string()))?;
     let mut result = conn
         .query(
-            "SELECT * FROM nasa_api_data WHERE date < ?1",
+            "SELECT * FROM nasa_api_data WHERE date = ?1",
             [today_formatted],
         )
         .await
