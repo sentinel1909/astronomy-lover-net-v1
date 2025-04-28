@@ -1,0 +1,11 @@
+/* screen.css */
+
+/* This file contains the CSS styles for the vanilla-web-template */
+/* there is one CSS selector, body, which has two properties, max-width and margin, to limit the screen */
+/* size to a maximum width of 1028 pixels. The margin tag has two values, 0 and auto, which serve to center */
+/* the body tag on the screen. */
+
+body {
+    max-width: 1028px;
+    margin: 0 auto;
+}

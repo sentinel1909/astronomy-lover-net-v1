@@ -1,17 +1,38 @@
-[workspace]
-resolver = "2"
-members = ["domain", "server", "site"]
-default-members = ["server"]
-
-[workspace.package]
-version = "0.16.5"
+# crusty-rustacean-blog Cargo.toml definition
+[package]
+name = "astronomy-lover-net"
+version = "0.20.2"
 edition = "2024"
-description = "A full stack site, built with Axum and Leptos, that fetches and displays the daily image/video from the NASA APOD API"
+authors = ["Jeffery D. Mitchell", "<crusty-rustacean@jeff-mitchell.dev>"]
+description = "A full stack site which displays the NASA Astronomy image of the day"
 readme = "README.md"
-repository = "https://github.com/sentinel1909/nasa-imagery-viewer-v2.git"
+repository = "https://github.com/sentinel1909/astronomy-lover-net-v1.git"
 license = "MIT"
 publish = false
 
-[workspace.dependencies]
-domain = { path = "./domain" }
-serde = { version = "1.0.217", features = ["derive"] }
+# binary definition
+[[bin]]
+name = "astronomy-lover-net"
+path = "src/bin/main.rs"
+
+# library definition
+[lib]
+name = "astronomy_lover_net_lib"
+path = "src/lib/lib.rs"
+
+# package dependences
+[dependencies]
+hyper = { version = "1.6.0", features = ["http1", "server"] }
+hyper-util = { version = "0.1.11", features = ["server"] }
+http-body-util = "0.1.3"
+matchit = "0.8.6"
+serde = { version = "1.0.219", features = ["derive"] }
+serde_json = "1.0.140"
+shuttle-runtime = { version = "0.53.0", features = [ "setup-otel-exporter" ] }
+thiserror = "2.0.12"
+tokio = { version = "1.44.2", features = ["net"] }
+tower = "0.5.2"
+tracing = "0.1.41"
+
+[dev-dependencies]
+reqwest = "0.12.15"
