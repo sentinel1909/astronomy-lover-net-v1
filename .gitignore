@@ -6,14 +6,12 @@
 # Zed Settings
 .zed
 
+# Environment Variables
+.env
+
 # Build artifacts
-public
-target
+/target
 
 # Shuttle configuraiton and environment variables
 .shuttle*
 Secrets*.toml
-/target
-
-# Turso Sqlite database files
-*.db

@@ -3,10 +3,10 @@ name = "astronomy-lover-net-v1"
 
 [deploy]
 include = [
-  "public/*"
+  "site/*"
 ]
 
 [build]
 assets = [
-  "public/*",
+  "site/*",
 ]
