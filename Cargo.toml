@@ -1,7 +1,7 @@
 # crusty-rustacean-blog Cargo.toml definition
 [package]
 name = "astronomy-lover-net"
-version = "0.20.2"
+version = "0.21.0"
 edition = "2024"
 authors = ["Jeffery D. Mitchell", "<crusty-rustacean@jeff-mitchell.dev>"]
 description = "A full stack site which displays the NASA Astronomy image of the day"
