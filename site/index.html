@@ -6,10 +6,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- set up some preloaders, so the browser knows about them as soon as possible -->
-    <link rel="preload" href="styles/screen.css" as="style" />
-    <link rel="preload" href="scripts/scripts.js" as="script" />
+    <link rel="preload" href="styles/screen.css" as="style" type="text/css" crossorigin="anonymous" />
+    <link rel="preload" href="scripts/scripts.js" as="script" crossorigin />
     <title>Astronomy Lover | Home</title>
-    <link rel="stylesheet" type="text/css" href="styles/screen.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="styles/screen.css" media="screen" crossorigin="anonymous" />
     <link rel="icon" type="image/x-icon" href="static/favicon.ico" />
 </head>
 <body>
@@ -20,11 +20,19 @@
     <main>
         <section>
             <article>
-                <p>This is a plain vanilla web site, written with good 'ol HTML/CSS/JavaScript.</p>
+               <h3 id="title"></h3>
+               <p id="explanation"></p>
+               <div id="media-container">
+                <!-- image or video goes here -->
+                <img id="image" style="max-width: 100%; display: none;" />
+                <iframe id="video" width="100%" height="500" frameborder="0" allowfullscreen style="display: none;">:width</iframe>
+               </div>
+               <p id="copyright"></p> 
             </article>
         </section>
     </main>
     <footer>
+        <br />
         <p>&copy; <span id="year"></span> Jeffery D. Mitchell</p>
     </footer>
     <script src="scripts/scripts.js" type="module"></script>
