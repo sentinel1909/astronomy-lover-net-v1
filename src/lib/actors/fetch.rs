@@ -60,7 +60,12 @@ impl FetchActor {
                     let url = build_api_url(self.nasa_api_key.clone());
                     let result = match self.client.get(url).send().await {
                         Ok(response) => match response.json::<NasaData>().await {
-                            Ok(data) => FetchResult::Ok(data),
+                            Ok(data) => {
+                                tracing::info!("Fetched NASA data: {:?}", data);
+
+                                FetchResult::Ok(data)
+                            },
+                            
                             Err(e) => FetchResult::FetchError(e),
                         },
                         Err(e) => FetchResult::FetchError(e),
