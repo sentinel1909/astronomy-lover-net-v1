@@ -4,7 +4,7 @@
 use crate::helpers::{get_test_client, start_test_server, start_test_server_with_state};
 use astronomy_lover_net_lib::init::build_route_table;
 use astronomy_lover_net_lib::state::AppState;
-use astronomy_lover_net_lib::{AnalyticsMessage, FilesMessage, PingMessage};
+use astronomy_lover_net_lib::{AnalyticsMessage, FetchMessage, FilesMessage, PingMessage};
 use serde::Deserialize;
 use std::sync::Arc;
 use tokio::sync::mpsc;
@@ -58,6 +58,7 @@ async fn count_route_returns_200_ok_and_correct_ping_count() {
 async fn count_route_returns_500_when_actor_does_not_respond() {
     // Arrange: actor receives GetCount but never replies
     let (ping_tx, mut ping_rx) = mpsc::channel::<PingMessage>(1);
+    let (fetch_tx, _fetch_rx) = mpsc::channel::<FetchMessage>(1);
     let (files_tx, _files_rx) = mpsc::channel::<FilesMessage>(1);
     let (analytics_tx, _analytics_rx) = mpsc::channel::<AnalyticsMessage>(1);
 
@@ -77,6 +78,7 @@ async fn count_route_returns_500_when_actor_does_not_respond() {
 
     let state = AppState {
         analytics_tx,
+        fetch_tx,
         files_tx,
         ping_tx,
         routes: Arc::new(build_route_table()),

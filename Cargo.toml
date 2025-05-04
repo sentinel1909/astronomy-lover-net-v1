@@ -1,7 +1,7 @@
 # crusty-rustacean-blog Cargo.toml definition
 [package]
 name = "astronomy-lover-net"
-version = "0.21.0"
+version = "0.22.0"
 edition = "2024"
 authors = ["Jeffery D. Mitchell", "<crusty-rustacean@jeff-mitchell.dev>"]
 description = "A full stack site which displays the NASA Astronomy image of the day"
@@ -33,6 +33,9 @@ thiserror = "2.0.12"
 tokio = { version = "1.44.2", features = ["net"] }
 tower = "0.5.2"
 tracing = "0.1.41"
+reqwest = "0.12.15"
+url = "2.5.4"
 
 [dev-dependencies]
+dotenvy = "0.15.7"
 reqwest = "0.12.15"

@@ -5,9 +5,8 @@ use crate::errors::ApiError;
 use crate::state::AppState;
 use http_body_util::combinators::BoxBody;
 use hyper::{
-    Error, Request, Response,
+    Error, Method, Request, Response,
     body::{Bytes, Incoming},
-    Method,
 };
 use matchit::Params;
 use serde::{Deserialize, Serialize};
@@ -15,7 +14,6 @@ use std::{future::Future, pin::Pin};
 
 // re-exports
 pub use shuttle_runtime::Error as HyperServiceError;
-
 
 // type aliases
 pub(crate) type HandlerFn = fn(SvcReq, AppState, Params) -> HandlerResult;

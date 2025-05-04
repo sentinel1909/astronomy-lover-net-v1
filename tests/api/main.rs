@@ -3,6 +3,7 @@
 mod analytics;
 mod count;
 mod echo;
+mod fetch;
 mod health;
 mod helpers;
 mod ping;

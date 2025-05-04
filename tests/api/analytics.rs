@@ -2,7 +2,7 @@
 
 // dependencies
 use crate::helpers::{get_test_client, start_test_server, start_test_server_with_state};
-use astronomy_lover_net_lib::actors::{AnalyticsMessage, FilesMessage, PingMessage};
+use astronomy_lover_net_lib::actors::{AnalyticsMessage, FetchMessage, FilesMessage, PingMessage};
 use astronomy_lover_net_lib::init::build_route_table;
 use astronomy_lover_net_lib::state::AppState;
 use serde::Deserialize;
@@ -76,6 +76,7 @@ async fn metrics_returns_200_and_reflects_ping_activity() {
 async fn metrics_route_returns_500_when_actor_does_not_respond() {
     // Arrange: Analytics actor receives GetAll but never replies
     let (analytics_tx, mut analytics_rx) = mpsc::channel::<AnalyticsMessage>(1);
+    let (fetch_tx, _fetch_rx) = mpsc::channel::<FetchMessage>(1);
     let (files_tx, _files_rx) = mpsc::channel::<FilesMessage>(1);
     let (ping_tx, _ping_rx) = mpsc::channel::<PingMessage>(1);
 
@@ -89,6 +90,7 @@ async fn metrics_route_returns_500_when_actor_does_not_respond() {
 
     let state = AppState {
         analytics_tx,
+        fetch_tx,
         files_tx,
         ping_tx,
         routes: Arc::new(build_route_table()),

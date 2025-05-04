@@ -17,6 +17,9 @@ pub enum ApiError {
     #[error("Not found")]
     NotFound,
 
+    #[error("Network fetch error: {0}")]
+    NetworkError(#[from] reqwest::Error),
+
     #[error("File not found")]
     FileNotFound,
 
@@ -50,6 +53,7 @@ impl ApiError {
             ApiError::NotFound => StatusCode::NOT_FOUND,
             ApiError::FileNotFound => StatusCode::NOT_FOUND,
             ApiError::FileIo(_) => StatusCode::INTERNAL_SERVER_ERROR,
+            ApiError::NetworkError(_) => StatusCode::INTERNAL_SERVER_ERROR,
             ApiError::ActorUnavailable => StatusCode::BAD_GATEWAY,
             ApiError::ActorFailed => StatusCode::INTERNAL_SERVER_ERROR,
             ApiError::InvalidInput(_) => StatusCode::BAD_REQUEST,

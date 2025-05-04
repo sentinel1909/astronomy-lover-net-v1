@@ -15,3 +15,6 @@
 # Shuttle configuraiton and environment variables
 .shuttle*
 Secrets*.toml
+
+# Frontend - node_modules
+/frontend/node_modules

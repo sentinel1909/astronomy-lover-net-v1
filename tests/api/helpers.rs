@@ -3,7 +3,7 @@
 // dependencies
 use astronomy_lover_net_lib::init::build_route_table;
 use astronomy_lover_net_lib::routes::router;
-use astronomy_lover_net_lib::{AnalyticsActor, AppState, FilesActor, PingCounterActor};
+use astronomy_lover_net_lib::{AnalyticsActor, AppState, FetchActor, FilesActor, PingCounterActor};
 use hyper::server::conn::http1;
 use hyper::service::service_fn;
 use hyper_util::rt::TokioIo;
@@ -56,12 +56,16 @@ pub async fn start_test_server_with_state(state: AppState) -> SocketAddr {
 
 // start a server
 pub async fn start_test_server() -> SocketAddr {
+    dotenvy::dotenv().ok();
+    let api_key = std::env::var("NASA_API_KEY").expect("NASA_API_KEY nto set in .env");
     let (analytics_tx, _handle) = AnalyticsActor::start_analytics_actor();
+    let (fetch_tx, _fetch_handle) = FetchActor::start_fetch_actor(api_key);
     let (files_tx, _handle) = FilesActor::start_files_actor();
     let (ping_tx, _handle) = PingCounterActor::start_ping_actor();
 
     let state = AppState {
         analytics_tx,
+        fetch_tx,
         files_tx,
         ping_tx,
         routes: Arc::new(build_route_table()),

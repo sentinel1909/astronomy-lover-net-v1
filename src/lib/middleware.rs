@@ -28,7 +28,11 @@ where
     type Error = S::Error;
     type Future = S::Future;
     fn call(&self, req: Req) -> Self::Future {
-        println!("Processing incoming request: {} {}", req.method(), req.uri().path());
+        println!(
+            "Processing incoming request: {} {}",
+            req.method(),
+            req.uri().path()
+        );
         self.inner.call(req)
     }
 }

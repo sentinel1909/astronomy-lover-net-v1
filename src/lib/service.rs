@@ -2,6 +2,7 @@
 
 // dependencies
 use crate::actors::analytics::AnalyticsMessage;
+use crate::actors::fetch::FetchMessage;
 use crate::actors::files::FilesMessage;
 use crate::actors::ping::PingMessage;
 use crate::init::build_route_table;
@@ -25,6 +26,7 @@ use tower::ServiceBuilder;
 pub struct HyperService {
     pub analytics_tx: Sender<AnalyticsMessage>,
     pub files_tx: Sender<FilesMessage>,
+    pub fetch_tx: Sender<FetchMessage>,
     pub ping_tx: Sender<PingMessage>,
 }
 
@@ -38,6 +40,7 @@ impl Service for HyperService {
         // create the application state
         let state = AppState {
             analytics_tx: self.analytics_tx.clone(),
+            fetch_tx: self.fetch_tx.clone(),
             files_tx: self.files_tx.clone(),
             ping_tx: self.ping_tx.clone(),
             routes: Arc::new(table),
