@@ -57,7 +57,7 @@ pub async fn start_test_server_with_state(state: AppState) -> SocketAddr {
 // start a server
 pub async fn start_test_server() -> SocketAddr {
     dotenvy::dotenv().ok();
-    let api_key = std::env::var("NASA_API_KEY").expect("NASA_API_KEY nto set in .env");
+    let api_key = std::env::var("NASA_API_KEY").expect("NASA_API_KEY not set in .env");
     let (analytics_tx, _handle) = AnalyticsActor::start_analytics_actor();
     let (fetch_tx, _fetch_handle) = FetchActor::start_fetch_actor(api_key);
     let (files_tx, _handle) = FilesActor::start_files_actor();
