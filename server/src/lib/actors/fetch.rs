@@ -45,7 +45,11 @@ impl FetchActor {
         let client = Client::new();
         let nasa_api_key = api_key;
         let (tx, rx) = mpsc::channel::<FetchMessage>(32);
-        let fetch_actor = Self { client, rx, nasa_api_key };
+        let fetch_actor = Self {
+            client,
+            rx,
+            nasa_api_key,
+        };
         let fetch_handle = spawn(async move {
             fetch_actor.run().await;
         });
@@ -64,8 +68,8 @@ impl FetchActor {
                                 tracing::info!("Fetched NASA data: {:?}", data);
 
                                 FetchResult::Ok(data)
-                            },
-                            
+                            }
+
                             Err(e) => FetchResult::FetchError(e),
                         },
                         Err(e) => FetchResult::FetchError(e),

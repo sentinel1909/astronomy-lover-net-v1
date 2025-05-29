@@ -1,9 +1,11 @@
 // src/main.rs
 
 // dependencies
-use astronomy_lover_net_lib::HyperService;
-use astronomy_lover_net_lib::actors::{AnalyticsActor, FetchActor, FilesActor, PingCounterActor};
-use astronomy_lover_net_lib::types::HyperServiceError;
+use astronomy_lover_net_server_lib::HyperService;
+use astronomy_lover_net_server_lib::actors::{
+    AnalyticsActor, FetchActor, FilesActor, PingCounterActor,
+};
+use astronomy_lover_net_server_lib::types::HyperServiceError;
 use shuttle_runtime::SecretStore;
 
 // main function, annotated for Shuttle

@@ -2,9 +2,11 @@
 
 // dependencies
 use crate::helpers::{get_test_client, start_test_server, start_test_server_with_state};
-use astronomy_lover_net_lib::actors::{AnalyticsMessage, FetchMessage, FilesMessage, PingMessage};
-use astronomy_lover_net_lib::init::build_route_table;
-use astronomy_lover_net_lib::state::AppState;
+use astronomy_lover_net_server_lib::actors::{
+    AnalyticsMessage, FetchMessage, FilesMessage, PingMessage,
+};
+use astronomy_lover_net_server_lib::init::build_route_table;
+use astronomy_lover_net_server_lib::state::AppState;
 use serde::Deserialize;
 use std::sync::Arc;
 use tokio::sync::mpsc;

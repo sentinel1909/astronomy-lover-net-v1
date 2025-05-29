@@ -1,0 +1,5 @@
+# Trunk configuration file
+
+[build]
+
+dist = "../site"

@@ -1,0 +1,30 @@
+[package]
+name = "astronomy-lover-net-site"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+description.workspace = true
+readme.workspace = true
+repository.workspace = true
+license.workspace = true
+
+[[bin]]
+name = "astronomy-lover-net-site"
+path = "src/bin/main.rs"
+
+[lib]
+name = "astronomy_lover_net_lib"
+path = "src/lib/lib.rs"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+console_error_panic_hook = "0.1.7"
+gloo-net = { version = "0.6.0", features = [ "json" ]}
+log = "0.4.22"
+secrecy = "0.10.2"
+serde = { version = "1.0.196", features = ["derive"] }
+wasm-bindgen-futures = "0.4.41"
+wasm-logger = "0.2.0"
+yew = { version = "0.21.0", features = ["csr"] }
+yewdux = "0.11.0"

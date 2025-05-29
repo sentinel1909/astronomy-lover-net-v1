@@ -1,9 +1,11 @@
 // tests/api/helpers.rs
 
 // dependencies
-use astronomy_lover_net_lib::init::build_route_table;
-use astronomy_lover_net_lib::routes::router;
-use astronomy_lover_net_lib::{AnalyticsActor, AppState, FetchActor, FilesActor, PingCounterActor};
+use astronomy_lover_net_server_lib::init::build_route_table;
+use astronomy_lover_net_server_lib::routes::router;
+use astronomy_lover_net_server_lib::{
+    AnalyticsActor, AppState, FetchActor, FilesActor, PingCounterActor,
+};
 use hyper::server::conn::http1;
 use hyper::service::service_fn;
 use hyper_util::rt::TokioIo;
